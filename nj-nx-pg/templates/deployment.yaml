@@ -1,21 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: postgre13-deploy
+  name: argo-postgre13-deploy
   labels:
-    app: postgre13
+    app: argo-postgre13
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: postgre13
+      app: argo-postgre13
   template:
     metadata:
       labels:
-        app: postgre13
+        app: argo-postgre13
     spec:
       containers:
-        - name: postgre13
+        - name: argo-postgre13
           image: postgres:13-alpine3.20
           ports:
             - containerPort: 5432
