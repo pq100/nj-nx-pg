@@ -11,6 +11,7 @@ spec:
       app: argo-postgre13
   template:
     metadata:
+      name: argo-postgre13
       labels:
         app: argo-postgre13
     spec:
@@ -34,4 +35,30 @@ spec:
         - name: initdb-script
           configMap:
             name: pets-initdb-config
-
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: argo-nodejs-deploy
+  labels:
+    app: argo-nodejs
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: argo-nodejs
+  template:
+    metadata:
+      name: argo-nodejs
+      labels:
+        app: argo-nodejs
+    spec:
+      containers:
+        - name: argo-nodejs
+          image: snicuz0588/k8s-nodejs:v2
+          ports:
+            - containerPort: 3000
+              protocol: TCP
+          env:
+            - name: DB_HOST
+              value: argo-postgre-svc
